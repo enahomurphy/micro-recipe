@@ -1,13 +1,16 @@
-const koa = require('koa');
+const express = require('express');
 
-const app = new koa();
+const app = express();
+const port = 3000 || process.env.PORT
 
-app.use((ctx) => {
-  ctx.body = {
-    message: 'hello world'
-  }
+
+app.get('/', (req, res) => {
+  res.send("Hello world")
 });
 
-app.listen(4000, () => {
-  console.log('server is running on port 3000');
+app.listen(port, (err) => {
+  if (err) {
+    throw new Error(err.message)
+  }
+  console.log(`recipe service is running on port ${port}`)
 });
