@@ -4,7 +4,7 @@
   "description": "api for managinf recipe resource",
   "main": "server.js",
   "scripts": {
-    "test": "npm run test",
+    "test": "node_modules/.bin/_mocha test/**/*.js",
     "start": "node server.js"
   },
   "repository": {
@@ -24,11 +24,11 @@
     "url": "https://github.com/enahomurphy/micro-recipe/issues"
   },
   "homepage": "https://github.com/enahomurphy/micro-recipe#readme",
-  "dependencies": {
-  },
   "devDependencies": {
+    "chai": "^4.1.0",
     "eslint": "^4.2.0",
-    "eslint-plugin-import": "^2.7.0",
     "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^3.4.2"
   }
 }
