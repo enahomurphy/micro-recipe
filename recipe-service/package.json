@@ -1,0 +1,34 @@
+{
+  "name": "recipe-service",
+  "version": "1.0.0",
+  "description": "api for managinf recipe resource",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enahomurphy/micro-recipe.git"
+  },
+  "keywords": [
+    "recipe",
+    "microservices",
+    "api",
+    "koajs",
+    "nodejs"
+  ],
+  "author": "Enaho Murphy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enahomurphy/micro-recipe/issues"
+  },
+  "homepage": "https://github.com/enahomurphy/micro-recipe#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^4.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+  }
+}
