@@ -7,13 +7,17 @@ require('../../server');
 should = should();
 
 describe('Recipe', () => {
+  after(done => {
+    Recipe.collection.remove();
+    done();
+  });
   describe('Create recipe', () => {
     it('should save new recipe', done => {
       const content = Object.assign({}, recipeContent[0]);
       const recipe = new Recipe(content);
-      recipe.save((err, test) => {
+      recipe.save((err, result) => {
         should.equal(err, null);
-        test.should.have.property('_id');
+        result.should.have.property('_id');
         done();
       });
     });
