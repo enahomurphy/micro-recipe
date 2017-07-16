@@ -5,38 +5,70 @@ const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema({
   name: {
-    type: string,
+    type: String,
     required: [true, 'Recipe name is required'],
     lowercase: true,
-    validate(v) {
-      return new Promise((resolve) => {
-        resolve(v && v.length > 2)
-      });
+    validate: {
+      validator(v) {
+        return new Promise(resolve => {
+          resolve(v && v.length > 2);
+        });
+      },
+      message: 'Recipe name should be greater than two characters'
     },
-    message: '{VALUE} is not a valid recipe name'
   },
-   description: {
-     type: string
-   },
-    instruction: {
-      type: string
-    },
-    photos: {
-      type: Array
-    },
-    userId: {
-      type: ObjectId,
-      required: [true, 'User id is required']
-    },
-    categoryId: {
-      type: ObjectId,
-      required: [true, 'Category id is required']
-    }
-}, { 
-  timestamps: 
-    { createdAt: 'created_at', 
+  description: {
+    type: String
+  },
+  instruction: {
+    type: String
+  },
+  photos: {
+    type: Array
+  },
+  userId: {
+    type: String,
+    required: [true, 'User id is required']
+  },
+  categoryId: {
+    type: String,
+    required: [true, 'Category id is required']
+  }
+}, {
+  timestamps:
+    { createdAt: 'created_at',
       updatedAt: 'updated_at'
     }
 });
+
+/**
+ * @Class
+ */
+class Recipe {
+  /**
+   * @param {string} id
+   * @return {object} returns a user
+   */
+  getRecipeById(id) {
+    return this.findById(id);
+  }
+
+  /**
+   * @param {int} limit
+   * @param {int} page
+   * @return {object} returns an object
+   */
+  getAllRecipes(limit = 10, page) {
+    const query = { limit, sort: { createdAt: -1 } };
+    if (page) {
+      query.page = limit * page;
+    }
+    return {
+      result: this.find(query).fetch(),
+      count: this.count()
+    };
+  }
+}
+RecipeSchema.loadClass(Recipe);
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

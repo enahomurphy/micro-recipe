@@ -29,7 +29,8 @@
     "eslint": "^4.2.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.7.0",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.8"
   },
   "dependencies": {
     "dotenv": "^4.0.0",

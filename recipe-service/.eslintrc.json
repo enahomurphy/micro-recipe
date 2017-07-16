@@ -27,6 +27,7 @@
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
+    "arrow-parens": ["error", "as-needed"],
     "curly": [1, "multi-line"],
     "no-shadow": [1, { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": [1, {

@@ -1,7 +1,7 @@
 const { join } = require('path');
 
-require('dotenv').config({path: join(__dirname, '../../.env')})
+require('dotenv').config({ path: join(__dirname, '../../.env') });
 
 module.exports = {
-  dbUrl: 'mongodb://mongo/recipe'
-}
+  dbUrl: process.env.DB_URL
+};

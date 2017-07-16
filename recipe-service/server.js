@@ -2,16 +2,16 @@ const express = require('express');
 
 const config = require('./app/config');
 
+const app = express();
+const port = 3000 || process.env.PORT
+
+
+app.get('/', (req, res) => {
+  res.send("Hello world")
+});
+
 require('./app/config/db')(config)
   .then(() => {
-    const app = express();
-    const port = 3000 || process.env.PORT
-
-
-    app.get('/', (req, res) => {
-      res.send("Hello world")
-    });
-
     app.listen(port, (err) => {
       if (err) {
         throw new Error(err.message)
@@ -20,3 +20,5 @@ require('./app/config/db')(config)
     });
   })
   .catch(err =>  { throw new Error(`Connection error ${err.message}`) });
+
+module.exports = app;
