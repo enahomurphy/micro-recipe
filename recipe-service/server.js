@@ -1,4 +1,5 @@
 const express = require('express');
+const winston = require('winston');
 
 const config = require('./app/config');
 
@@ -16,7 +17,7 @@ require('./app/config/db')(config)
       if (err) {
         throw new Error(err.message);
       }
-      console.log(`recipe service is running on port ${port}`);
+      winston.log(`recipe service is running on port ${port}`);
     });
   })
   .catch(err => { throw new Error(`Connection error ${err.message}`); });

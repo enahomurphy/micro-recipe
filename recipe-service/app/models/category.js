@@ -31,7 +31,7 @@ const CategorySchema = new Schema({
 /**
  * @Class
  */
-class Recipe {
+class Category {
   /**
    * @param {string} id
    * @return {object} returns a user
@@ -56,6 +56,6 @@ class Recipe {
     };
   }
 }
-CategorySchema.loadClass(Recipe);
+CategorySchema.loadClass(Category);
 
 module.exports = mongoose.model('Category', CategorySchema);

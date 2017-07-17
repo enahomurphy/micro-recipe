@@ -17,7 +17,6 @@ describe('category', () => {
       const content = Object.assign({}, categoryContent[0]);
       const category = new Category(content);
       category.save((err, result) => {
-        console.log(err);
         should.equal(err, null);
         result.should.have.property('_id');
         result.should.have.property('title');

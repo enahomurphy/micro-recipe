@@ -44,7 +44,25 @@ module.exports = {
     },
     {
       title: 'swallow',
-      descripion: 'text ever since the 1500s,when an unknown took a galley ',
+      descripion: 'text ever since the 1500s,when an unknown took a galley',
+      created_at: '2016-02-28T16:41:41.090Z',
+      updated_at: '2016-02-28T16:41:41.090Z'
+    }
+  ],
+  ingredientContent: [
+    {
+      name: 'tomatoes',
+      quantity: '20',
+      unit: 'kg',
+      recipeId: 'Bhdi083',
+      created_at: '2016-02-28T16:41:41.090Z',
+      updated_at: '2016-02-28T16:41:41.090Z'
+    },
+    {
+      name: 'sugar',
+      quantity: '3',
+      unit: 'g',
+      recipeId: 'Bhdi083',
       created_at: '2016-02-28T16:41:41.090Z',
       updated_at: '2016-02-28T16:41:41.090Z'
     }
