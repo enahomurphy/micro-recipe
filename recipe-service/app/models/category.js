@@ -36,7 +36,7 @@ class Category {
    * @param {string} id
    * @return {object} returns a user
    */
-  getCategoryById(id) {
+  static getCategoryById(id) {
     return this.findById(id);
   }
 
@@ -45,7 +45,7 @@ class Category {
    * @param {int} page
    * @return {object} returns an object
    */
-  getAllCategories(limit = 10, page) {
+  static getAllCategories(limit = 10, page) {
     const query = { limit, sort: { createdAt: -1 } };
     if (page) {
       query.page = limit * page;

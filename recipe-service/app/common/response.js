@@ -58,7 +58,7 @@ module.exports = class Response {
   /**
    * Method for 200 response.
    * @param  {Object} res - response object
-   * @param  {Object} data - data sent back to user
+   * @param  {Object} data - data sent bafck to user
    * @param {String} message - message about response
    * @returns {Object}  response to be sent to client
    */
