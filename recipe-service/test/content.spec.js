@@ -38,13 +38,13 @@ module.exports = {
   categoryContent: [
     {
       title: 'Snacks',
-      descripion: "Lorem Ipsum has been the industry's standa",
+      description: "Lorem Ipsum has been the industry's standa",
       created_at: '2016-02-28T16:41:41.090Z',
       updated_at: '2016-02-28T16:41:41.090Z'
     },
     {
       title: 'swallow',
-      descripion: 'text ever since the 1500s,when an unknown took a galley',
+      description: 'text ever since the 1500s,when an unknown took a galley',
       created_at: '2016-02-28T16:41:41.090Z',
       updated_at: '2016-02-28T16:41:41.090Z'
     }
