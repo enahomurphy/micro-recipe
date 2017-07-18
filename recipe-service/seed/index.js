@@ -1,7 +1,6 @@
 const winston = require('winston');
 
 require('../server');
-console.log(process.env)
 /**
  * @class
  */
@@ -13,7 +12,7 @@ module.exports = class Seed {
   constructor(schema) {
     this.data = [];
     this.schema = schema;
-    if (this.generate === undefined && this.schema === null) {
+    if (this.generate === undefined) {
       throw new TypeError('Abstract class implement generate method');
     }
   }

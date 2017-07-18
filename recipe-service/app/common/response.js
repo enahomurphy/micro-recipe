@@ -138,4 +138,4 @@ module.exports = class Response {
     return this.setStatus(201)
       .respond(res, data);
   }
-}
+};
