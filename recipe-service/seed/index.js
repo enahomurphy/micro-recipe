@@ -13,16 +13,18 @@ module.exports = class Seed {
     this.data = [];
     this.schema = schema;
     if (this.generate === undefined) {
-      throw new TypeError('Abstract class implement generate method');
+      throw new TypeError('Abstract class implements generate method');
     }
   }
 
   /**
    * wipes collection
-   * @return {void}
+   * @return {Object}
    */
   wipe() {
+    this.data = [];
     this.schema.collection.remove();
+    return this;
   }
 
   /**
@@ -31,7 +33,8 @@ module.exports = class Seed {
    * @param {Integer} number 
    * @return {Object} Object 
    */
-  build(number) {
+  build(number = 1) {
+    this.wipe();
     for (let i = 0; i < number; i += 1) {
       this.data.push(i);
     }
@@ -45,14 +48,12 @@ module.exports = class Seed {
    */
   run() {
     if (['development', 'test'].includes(process.env.NODE_ENV)) {
-      this.schema.insertMany(this.data)
+      this.schema.insertMany(999)
         .then(() => {
           winston.log('info', 'recipe seeding was successful');
-          process.exit(0);
         })
         .catch(err => {
-          console(err.message);
-          process.exit(1);
+          throw new Error(err.message);
         });
     } else {
       process.exit(1);

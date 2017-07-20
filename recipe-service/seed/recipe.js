@@ -6,11 +6,14 @@ const Seed = require('./');
 /**
  * @class
  */
-class RecipeSeed extends Seed {
+module.exports = class RecipeSeed extends Seed {
   /**
    * @constructor
    * @param {Object} schema object
    */
+  constructor() {
+    super(Recipe);
+  }
 
   /**
    * generates demo data for collection
@@ -29,4 +32,4 @@ class RecipeSeed extends Seed {
       categoryId: faker.random.uuid()
     };
   }
-}
+};

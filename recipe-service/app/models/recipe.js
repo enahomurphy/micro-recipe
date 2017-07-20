@@ -69,6 +69,9 @@ class Recipe {
     };
   }
 }
+
+const recipe = new Recipe();
+
 RecipeSchema.loadClass(Recipe);
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
