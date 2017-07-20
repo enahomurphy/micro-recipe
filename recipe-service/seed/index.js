@@ -1,6 +1,7 @@
 const winston = require('winston');
 
 require('../server');
+
 /**
  * @class
  */
@@ -48,9 +49,10 @@ module.exports = class Seed {
    */
   run() {
     if (['development', 'test'].includes(process.env.NODE_ENV)) {
-      this.schema.insertMany(999)
+      this.schema.insertMany(this.data)
         .then(() => {
-          winston.log('info', 'recipe seeding was successful');
+          winston.log('info', 'seeding was successful');
+          return true;
         })
         .catch(err => {
           throw new Error(err.message);

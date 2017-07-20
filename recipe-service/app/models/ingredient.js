@@ -54,7 +54,7 @@ class Ingredient {
    * @param {string} id
    * @return {object} returns a user
    */
-  getIngredientById(id) {
+  static getIngredientById(id) {
     return this.findById(id);
   }
 

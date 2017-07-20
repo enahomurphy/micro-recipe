@@ -3,6 +3,11 @@ const winston = require('winston');
 const { join } = require('path');
 
 const config = require('./app/config');
+const db = require('./app/config/db');
+const test = require('./app/controllers/test');
+
+console.log(test);
+
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -12,14 +17,13 @@ require('dotenv').config({ path: join(__dirname, '.env') });
 app.get('/', (req, res) => {
   res.send('Hello world');
 });
-
-require('./app/config/db')(config)
+db(config)
   .then(() => {
     app.listen(port, err => {
       if (err) {
         throw new Error(err.message);
       }
-      winston.log(`recipe service is running on port ${port}`);
+      winston.info(`recipe service is running on port ${port}`);
     });
   })
   .catch(err => { throw new Error(`Connection error ${err.message}`); });
