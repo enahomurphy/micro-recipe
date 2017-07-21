@@ -5,6 +5,9 @@ module.exports = class Model {
    */
   constructor() {
     this.query = {};
+    if (this.buildQuery) {
+      throw new Error('BuildQuery method must be implemented');
+    }
   }
 
   /**
@@ -14,18 +17,6 @@ module.exports = class Model {
    */
   static get(id) {
     return this.findById(id);
-  }
-
-  /**
-   * Builds query for getting all data
-   * @param {String} search
-   * @return {Object} returns a single model
-   */
-  static buildQuery(search) {
-    this.query = search ? {
-      name: new RegExp(search),
-    } : {};
-    return this;
   }
 
   /**

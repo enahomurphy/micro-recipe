@@ -34,7 +34,19 @@ const CategorySchema = new Schema({
  * @Class
  */
 class Category extends Model {
-  // TODO: implement methods related to this schema
+  /**
+   * @param {string} search
+   * @return {object} returns a user
+   */
+  static buildQuery(search) {
+    this.query = search ? {
+      $or: [
+        { title: new RegExp(search) },
+        { description: new RegExp(search) }
+      ]
+    } : {};
+    return this;
+  }
 }
 
 CategorySchema.loadClass(Category);
