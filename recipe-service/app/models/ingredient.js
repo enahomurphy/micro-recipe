@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const Model = require('./');
+
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
@@ -49,29 +51,14 @@ const IngredientSchema = new Schema({
 /**
  * @Class
  */
-class Ingredient {
+class Ingredient extends Model {
   /**
    * @param {string} id
    * @return {object} returns a user
    */
-  static getIngredientById(id) {
-    return this.findById(id);
-  }
-
-  /**
-   * @param {int} limit
-   * @param {int} page
-   * @return {object} returns an object
-   */
-  getAllIngredients(limit = 10, page) {
-    const query = { limit, sort: { createdAt: -1 } };
-    if (page) {
-      query.page = limit * page;
-    }
-    return {
-      result: this.find(query).fetch(),
-      count: this.count()
-    };
+  static buildQuery(search) {
+    this.query = search ? { name: new RegExp(search) } : {};
+    return this;
   }
 }
 IngredientSchema.loadClass(Ingredient);

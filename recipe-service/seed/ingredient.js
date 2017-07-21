@@ -1,18 +1,18 @@
 const faker = require('faker');
 
-const Recipe = require('../app/models/recipe');
+const Ingredient = require('../app/models/ingredient');
 const Seed = require('./');
 
 /**
  * @class
  */
-module.exports = class RecipeSeed extends Seed {
+class IngredientSeed extends Seed {
   /**
    * @constructor
    * @param {Object} schema object
    */
   constructor() {
-    super(Recipe);
+    super(Ingredient);
   }
 
   /**
@@ -27,4 +27,6 @@ module.exports = class RecipeSeed extends Seed {
       recipeId: faker.random.uuid(),
     };
   }
-};
+}
+
+module.exports = new IngredientSeed();
