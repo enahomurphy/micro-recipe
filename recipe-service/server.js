@@ -4,10 +4,7 @@ const { join } = require('path');
 
 const config = require('./app/config');
 const db = require('./app/config/db');
-const test = require('./app/controllers/test');
-
-console.log(test);
-
+const routes = require('./app/routes');
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -19,6 +16,7 @@ app.get('/', (req, res) => {
 });
 db(config)
   .then(() => {
+    app.use('/api/v1', routes(express));
     app.listen(port, err => {
       if (err) {
         throw new Error(err.message);

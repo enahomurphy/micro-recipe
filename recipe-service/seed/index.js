@@ -20,7 +20,7 @@ module.exports = class Seed {
 
   /**
    * wipes collection
-   * @return {Object}
+   * @return {Object} returns object instance
    */
   wipe() {
     this.data = [];
