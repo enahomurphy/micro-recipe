@@ -47,7 +47,21 @@ const RecipeSchema = new Schema({
  * @Class
  */
 class Recipe extends Model {
-  
+  /**
+   * Builds query for getting all data
+   * @param {String} search
+   * @return {Object} returns a single model
+   */
+  static buildQuery(search) {
+    this.query = search ? {
+      $or: [
+        { name: new RegExp(search), },
+        { description: new RegExp(search), },
+        { instruction: new RegExp(search), }
+      ]
+    } : {};
+    return this;
+  }
 }
 
 RecipeSchema.loadClass(Recipe);

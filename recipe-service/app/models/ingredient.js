@@ -53,7 +53,7 @@ const IngredientSchema = new Schema({
  */
 class Ingredient extends Model {
   /**
-   * @param {string} id
+   * @param {string} search
    * @return {object} returns a user
    */
   static buildQuery(search) {
