@@ -28,6 +28,6 @@ db(config)
       winston.info(`recipe service is running on port ${port}`);
     });
   })
-  .catch(err => { throw new Error(`Connection error ${err.message}`); });
+  .catch(err => { throw new Error(`Connection error: ${err.message}`); });
 
 module.exports = app;
