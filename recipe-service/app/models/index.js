@@ -28,12 +28,15 @@ module.exports = class Model {
    * @param {Object} where specific data to get
    * @return {Promise} returns an array object
    */
-  static getAll(limit = 10, page = 1, search, where = {}) {
+  static getAll(limit, page, search, where = {}) {
+    limit = parseInt(limit, 10);
+    limit = limit || 10; page = page || 1;
     const skip = limit * (page - 1);
-    const result = {};
+    const result = { limit, currentPage: page };
     return new Promise((resolve, reject) => {
       this.buildQuery(search)
-        .where(where).find(this.query).limit(limit)
+        .where(where)
+        .find(this.query).limit(limit)
         .skip(skip)
         .then(categories => {
           result.data = categories;

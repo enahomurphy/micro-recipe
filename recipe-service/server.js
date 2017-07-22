@@ -1,6 +1,7 @@
 const express = require('express');
 const winston = require('winston');
 const { join } = require('path');
+const { json, urlencoded } = require('body-parser');
 
 const config = require('./app/config');
 const db = require('./app/config/db');
@@ -14,6 +15,9 @@ require('dotenv').config({ path: join(__dirname, '.env') });
 app.get('/', (req, res) => {
   res.send('Hello world');
 });
+
+app.use(json());
+app.use(urlencoded({ extended: false }));
 db(config)
   .then(() => {
     app.use('/api/v1', routes(express));

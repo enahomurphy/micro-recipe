@@ -26,6 +26,7 @@ describe('ingredient', () => {
     it('should return error when name, recipeId null', done => {
       const ingredient = new Ingredient();
       ingredient.validate(err => {
+        console.log(err);
         err.errors.should.have.property('recipeId');
         err.errors.recipeId.message.should.eql('Recipe id is required');
         done();

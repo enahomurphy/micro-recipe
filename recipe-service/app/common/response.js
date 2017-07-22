@@ -1,3 +1,6 @@
+const Handler = require('./handler');
+
+
 /**
  * @class
  */
@@ -13,7 +16,7 @@ module.exports = class Response {
    * @param  {Number} status
    * @return {Object} object
    */
-  setStatus(status) {
+  static setStatus(status) {
     this.status = status;
     return this;
   }
@@ -22,7 +25,7 @@ module.exports = class Response {
    * gets status code response
    * @return {Number} object
    */
-  getStatus() {
+  static getStatus() {
     return this.status;
   }
 
@@ -35,7 +38,7 @@ module.exports = class Response {
    * @param  {Object} errors list of errors that occurred
    * @returns {Object}  response to be sent to client
    */
-  createMessage(code, type, message, errors = {}) {
+  static createMessage(code, type, message, errors = {}) {
     return {
       code,
       type,
@@ -50,7 +53,7 @@ module.exports = class Response {
    * @param  {Object} data - response data
    * @returns {Object}  response to be sent to client
    */
-  respond(res, data) {
+  static respond(res, data) {
     return res.status(this.getStatus())
       .json(data);
   }
@@ -58,11 +61,10 @@ module.exports = class Response {
   /**
    * Method for 200 response.
    * @param  {Object} res - response object
-   * @param  {Object} data - data sent bafck to user
-   * @param {String} message - message about response
-   * @returns {Object}  response to be sent to client
+   * @param  {String} data - response object
+   * @return {Object} returns a response object
    */
-  success(res, data) {
+  static success(res, data) {
     return this.setStatus(200)
       .respond(res, data);
   }
@@ -70,10 +72,12 @@ module.exports = class Response {
   /**
    * Sends a 404 response to client
    * @param  {Object} res - response object
+   * @param  {String} type - response object
    * @param {String} message - message about response
-   * @returns {Object}  response to be sent to client
+   * @param {Object} errors - message about response
+   * @return {Object} returns a response object
    */
-  notFound(res, type, message, errors) {
+  static notFound(res, type, message, errors) {
     return this.setStatus(404)
       .respond(res, this
         .respond(res, this.createMessage(500, type, message, errors)));
@@ -83,10 +87,12 @@ module.exports = class Response {
   /**
    * Sends a 500 response to client
    * @param  {Object} res - response object
+   * @param  {String} type - response object
    * @param {String} message - message about response
-   * @returns {Object}  response to be sent to client
+   * @param {Object} errors - message about response
+   * @return {Object} returns a response object
    */
-  serverError(res, type, message, errors) {
+  static serverError(res, type, message, errors) {
     return this.setStatus(500)
       .respond(res, this.createMessage(500, type, message, errors));
   }
@@ -94,22 +100,27 @@ module.exports = class Response {
   /**
    * Sends a 400 response to client
    * @param  {Object} res - response object
-   * @param {String} message - message about response
-   * @returns {Object}  response to be sent to client
+   * @param  {String} type - response object
+   * @param {Object} errors - message about response
+   * @return {Object} returns a response object
    */
-  badRequest(res, type, message, errors) {
+  static badRequest(res, type, errors) {
     return this.setStatus(400)
-      .respond(res, this
-        .respond(res, this.createMessage(400, type, message, errors)));
+      .respond(res,
+        this.createMessage(400, type,
+          errors.message,
+          Handler.error(errors.errors)));
   }
 
   /**
    * Sends a 401 response to client
    * @param  {Object} res - response object
+   * @param  {String} type - response object
    * @param {String} message - message about response
-   * @returns {Object}  response to be sent to client
+   * @param {Object} errors - message about response
+   * @return {Object} returns a response object
    */
-  unAuthorize(res, type, message, errors) {
+  static unAuthorize(res, type, message, errors) {
     return this.setStatus(401)
       .respond(res, this
         .respond(res, this.createMessage(500, type, message, errors)));
@@ -118,10 +129,12 @@ module.exports = class Response {
   /**
    * Sends a 403 response to client
    * @param  {Object} res - response object
+   * @param  {String} type - response object
    * @param {String} message - message about response
+   * @param {Object} errors - message about response
    * @returns {Object}  response to be sent to client
    */
-  forbidden(res, type, message, errors) {
+  static forbidden(res, type, message, errors) {
     return this.setStatus(403)
       .respond(res, this.createMessage(403, type, message, errors));
   }
@@ -134,7 +147,7 @@ module.exports = class Response {
    * @param {String} message - message about response
    * @returns {Object}  response to be sent to client
    */
-  created(res, data) {
+  static created(res, data) {
     return this.setStatus(201)
       .respond(res, data);
   }

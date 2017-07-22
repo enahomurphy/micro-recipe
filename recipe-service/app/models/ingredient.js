@@ -61,6 +61,7 @@ class Ingredient extends Model {
     return this;
   }
 }
+
 IngredientSchema.loadClass(Ingredient);
 
 module.exports = mongoose.model('Ingredient', IngredientSchema);
