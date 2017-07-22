@@ -20,8 +20,9 @@ const IngredientSchema = new Schema({
     },
   },
   quantity: {
-    type: String,
+    type: Number,
     lowercase: true,
+    default: 0
   },
   unit: {
     type: String,

@@ -40,10 +40,14 @@ module.exports = class Model {
         .skip(skip)
         .then(data => {
           result.data = data;
-          this.count().then(count => {
-            result.count = count;
-            resolve(result);
-          }).catch(error => reject(error));
+          this.buildQuery(search)
+            .where(where)
+            .find(this.query).count()
+            .then(count => {
+              result.count = count;
+              resolve(result);
+            })
+            .catch(error => reject(error));
         })
         .catch(error => reject(error));
     });
@@ -66,8 +70,7 @@ module.exports = class Model {
    */
   static updateData(id, details) {
     const options = {
-      runValidators: true,
-      new: true
+      new: true,
     };
     return this.findByIdAndUpdate(id, details, options);
   }

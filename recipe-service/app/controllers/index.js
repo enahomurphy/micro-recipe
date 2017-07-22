@@ -7,7 +7,9 @@ const _ = require('underscore');
 module.exports = class Controller {
   /**
    * @constructor
-   * @param {schema} schema 
+   * @param {Object} schema 
+   * @param {String} type type of schema
+   * @param {String} relation query relationship
    */
   constructor(schema, type, relation) {
     this.schema = schema;

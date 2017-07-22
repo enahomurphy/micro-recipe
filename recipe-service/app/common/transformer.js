@@ -6,12 +6,12 @@ module.exports = class Transformer {
    * @param {Number} limit 
    * @return {Object} returns meta data object
    */
-  static metaData(count, currentPage, limit) {
+  static metaData(count, currentPage, perPage) {
     return {
       totalCount: count,
-      pageCount: Math.round(count / limit),
+      pageCount: Math.round(count / perPage),
       currentPage,
-      perPage: limit
+      perPage
     };
   }
 
@@ -20,10 +20,10 @@ module.exports = class Transformer {
    * @param {Object} data data to format 
    * @return {Object} returns formated data
    */
-  static transform({ count, currentPage, limit, data }) {
+  static transform({ count, currentPage, data }) {
     return {
       data,
-      meta_data: this.metaData(count, parseInt(currentPage, 10), limit)
+      meta_data: this.metaData(count, parseInt(currentPage, 10), data.length)
     };
   }
 };

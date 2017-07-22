@@ -1,6 +1,5 @@
 const Handler = require('./handler');
 
-
 /**
  * @class
  */
@@ -32,10 +31,10 @@ module.exports = class Response {
 
   /**
    * Sends a response to client
-   * @param  {Integer} code status or error code
-   * @param  {String} type type of error that occurred
-   * @param  {String} message User friendly message for error
-   * @param  {Object} errors list of errors that occurred
+   * @param   {Integer} code status or error code
+   * @param   {String} type type of error that occurred
+   * @param   {String} message User friendly message for error
+   * @param   {Object} errors list of errors that occurred
    * @returns {Object}  response to be sent to client
    */
   static createMessage(code, type, message, errors = {}) {
@@ -49,8 +48,8 @@ module.exports = class Response {
 
   /**
    * Sends a response to client
-   * @param  {Object} res - response object
-   * @param  {Object} data - response data
+   * @param   {Object} res - response object
+   * @param   {Object} data - response data
    * @returns {Object}  response to be sent to client
    */
   static respond(res, data) {
@@ -73,8 +72,8 @@ module.exports = class Response {
    * Sends a 404 response to client
    * @param  {Object} res - response object
    * @param  {String} type - response object
-   * @param {String} message - message about response
-   * @param {Object} errors - message about response
+   * @param  {String} message - message about response
+   * @param  {Object} errors - message about response
    * @return {Object} returns a response object
    */
   static notFound(res, type, message) {
@@ -88,8 +87,8 @@ module.exports = class Response {
    * Sends a 500 response to client
    * @param  {Object} res - response object
    * @param  {String} type - response object
-   * @param {String} message - message about response
-   * @param {Object} errors - message about response
+   * @param  {String} message - message about response
+   * @param  {Object} errors - message about response
    * @return {Object} returns a response object
    */
   static serverError(res, type, message, errors) {
@@ -101,7 +100,7 @@ module.exports = class Response {
    * Sends a 400 response to client
    * @param  {Object} res - response object
    * @param  {String} type - response object
-   * @param {Object} errors - message about response
+   * @param  {Object} errors - message about response
    * @return {Object} returns a response object
    */
   static badRequest(res, type, errors) {
@@ -116,8 +115,8 @@ module.exports = class Response {
    * Sends a 401 response to client
    * @param  {Object} res - response object
    * @param  {String} type - response object
-   * @param {String} message - message about response
-   * @param {Object} errors - message about response
+   * @param  {String} message - message about response
+   * @param  {Object} errors - message about response
    * @return {Object} returns a response object
    */
   static unAuthorize(res, type, message, errors) {
@@ -128,10 +127,10 @@ module.exports = class Response {
 
   /**
    * Sends a 403 response to client
-   * @param  {Object} res - response object
-   * @param  {String} type - response object
-   * @param {String} message - message about response
-   * @param {Object} errors - message about response
+   * @param   {Object} res - response object
+   * @param   {String} type - response object
+   * @param   {String} message - message about response
+   * @param   {Object} errors - message about response
    * @returns {Object}  response to be sent to client
    */
   static forbidden(res, type, message, errors) {
@@ -142,9 +141,9 @@ module.exports = class Response {
 
   /**
    * Sends a 201 response to client
-   * @param  {Object} res - response object
-   * @param  {Object} data - data sent back to user
-   * @param {String} message - message about response
+   * @param   {Object} res - response object
+   * @param   {Object} data - data sent back to user
+   * @param   {String} message - message about response
    * @returns {Object}  response to be sent to client
    */
   static created(res, data) {

@@ -34,4 +34,4 @@ class RecipeSeed extends Seed {
   }
 }
 
-module.exports = new RecipeSeed();
+module.exports = RecipeSeed;
