@@ -1,16 +1,16 @@
 const Controller = require('./');
-const Schema = require('../models/category');
+const Schema = require('../models/recipe');
 
 
 /**
  * @class
  */
-class Category extends Controller {
+class Recipe extends Controller {
   /**
    * @constructor
    */
   constructor() {
-    super(Schema, 'category');
+    super(Schema, 'recipe', 'categoryId');
   }
 
   /**
@@ -18,9 +18,9 @@ class Category extends Controller {
    * @return {Object} returns this
    */
   setUpdatable() {
-    this.updatable = ['title', 'description'];
+    this.updatable = ['name', 'description', 'instruction', 'photos'];
     return this;
   }
 }
 
-module.exports = new Category();
+module.exports = new Recipe();

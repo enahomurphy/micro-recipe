@@ -38,8 +38,8 @@ module.exports = class Model {
         .where(where)
         .find(this.query).limit(limit)
         .skip(skip)
-        .then(categories => {
-          result.data = categories;
+        .then(data => {
+          result.data = data;
           this.count().then(count => {
             result.count = count;
             resolve(result);

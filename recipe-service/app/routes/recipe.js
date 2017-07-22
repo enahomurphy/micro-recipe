@@ -1,9 +1,18 @@
+const {
+  get,
+  getAll,
+  create,
+  update,
+  getRelation,
+  remove
+} = require('../controllers/recipe');
+
 module.exports = router => {
-  router.get('/recipes', (req, res) => { res.send(' get all'); })
-    .get('/recipes/:id', () => {})
-    .get('/categories/:id/recipes', () => {})
-    .post('/recipes', () => {})
-    .patch('/recipes/:id', () => {})
-    .delete('/recipes/:id', () => {});
+  router.get('/recipes', getAll)
+    .get('/recipes/:id', get)
+    .get('/categories/:categoryId/recipes', getRelation)
+    .post('/recipes', create)
+    .patch('/recipes/:id', update)
+    .delete('/recipes/:id', remove);
   return router;
 };

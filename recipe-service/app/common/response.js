@@ -77,10 +77,10 @@ module.exports = class Response {
    * @param {Object} errors - message about response
    * @return {Object} returns a response object
    */
-  static notFound(res, type, message, errors) {
+  static notFound(res, type, message) {
     return this.setStatus(404)
       .respond(res, this
-        .respond(res, this.createMessage(500, type, message, errors)));
+        .respond(res, this.createMessage(404, type, message)));
   }
 
 
