@@ -1,6 +1,5 @@
 module.exports = class Handler {
   /**
-   * 
    * @param  {Object} errors - request object
    * @return {Objects} returns a response
    */

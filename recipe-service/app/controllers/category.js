@@ -1,71 +1,26 @@
-const Response = require('../common/response');
-const Model = require('../models/category');
-const Transformer = require('../common/transformer');
-const _ = require('underscore');
+const Controller = require('./');
+const Schema = require('../models/category');
+
+
 /**
  * @class
  */
-module.exports = class Category {
+class Category extends Controller {
   /**
-   * Gets category by id
-   * @param  {Object} req - request object
-   * @param  {Object} res - response object
-   * @return {Objects} returns a response
+   * @constructor
    */
-  static get(req, res) {
-    Model.get(req.params.id)
-      .then(category => Response.success(res, category))
-      .catch(err => Response.serverError(res, 'ServerError', err.message));
-  }
-
-
-  /**
-   * Gets all categories
-   * @param  {Object} req - request object
-   * @param  {Object} res - response object
-   * @return {Objects} returns a response
-   */
-  static getAll(req, res) {
-    const { limit, page, q } = req.query;
-    Model.getAll(limit, page, q)
-      .then(category => Response.success(res, Transformer.transform(category)))
-      .catch(err => Response.serverError(res, 'ServerError', err.message));
+  constructor() {
+    super(Schema);
   }
 
   /**
-   * Creates a new  category
-   * @param  {Object} req - request object
-   * @param  {Object} res - response object
-   * @return {Objects} returns a response
+   * @param {Array} array 
+   * @return {Object} returns this
    */
-  static create(req, res) {
-    const category = new Model(req.body);
-    category.validate(err => {
-      if (err) {
-        return Response
-          .badRequest(res, 'ValidationError', err);
-      }
-      category.save()
-        .then(data => {
-          Response.success(res, data);
-        })
-        .catch(err => Response.serverError(res, 'ServerError', err.message));
-    });
+  setUpdatable() {
+    this.updatable = ['title', 'description'];
+    return this;
   }
+}
 
-  /**
-   * updates a category by id
-   * @param  {Object} req - request object
-   * @param  {Object} res - response object
-   * @return {Objects} returns a response
-   */
-  static update(req, res) {
-    const id = req.params.id;
-    const body = _.pick(req.body, ['title', 'description']);
-    Model.updateData(id, body)
-      .then(data => {
-        Response.success(res, data);
-      })
-      .catch(err => Response.serverError(res, 'ServerError', err.message));
-  }
-};
+module.exports = new Category();
