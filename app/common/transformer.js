@@ -9,7 +9,7 @@ module.exports = class Transformer {
   static metaData(count, currentPage, perPage) {
     return {
       totalCount: count,
-      pageCount: Math.round(count / perPage),
+      pageCount: Math.round(count / perPage) || 0,
       currentPage,
       perPage
     };
