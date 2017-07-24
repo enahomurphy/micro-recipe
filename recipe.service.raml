@@ -1,5 +1,5 @@
 #%RAML 1.0
-baseUri: http://social-recipe.com/api
+baseUri: http://localhost:3000/api/v1
 protocols: [ HTTPS, HTTP ]
 title: The social recipe api
 description: Movies service api
@@ -469,7 +469,7 @@ resourceTypes:
       description: This endpoint is used for getting and creating ingredients.
       type:   { Collection: { ReturnItem: Ingredients, item : IngredientBody, PostItem: Ingredient } }
 
-/ingredients{ingredientId}:
+/ingredients/{ingredientId}:
   displayName: Ingredient
   description: This endpoint is used for getting, deleting and updating ingredients.
   type: { Data: {ResourceName: Ingredients, item: Ingredient, Error: Error, message: Message, Type: IngredientBody } }
