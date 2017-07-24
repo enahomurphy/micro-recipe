@@ -26,12 +26,10 @@ types:
       errors: object
     examples:
       first:
-        code: 404
+        code: 400
         type: validation_failed
         message: Invalid parameters forund when trying to validate your form
-        errors:
-          first_name: invalid userid passed in
-          last_name: category_id must not be null
+        errors: {}
   Message:
     type: object
     displayName: Message handler
@@ -132,6 +130,21 @@ types:
           "currentPage": 1,
           "perPage": 20
         }
+  RecipeBody:
+    displayName: Recipe request body
+    description: This shows the data allowed to be sent as request when creating or updating a recipe
+    type: Recipe
+    example:
+      name: "ogbono soup"
+      descripion: "Lorem Ipsum has been the industry's standard
+      dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
+      instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+      photos:
+        - https://randomuser.me/api/portraits/med/men/83.jpg
+        - https://randomuser.me/api/portraits/med/med/83.jpg
+      category_id: "sajanjs9i0i23023"
+      user_id: "B9jsdjksdHsjdkd"
+
   Category:
     displayName: Recipe Category
     description: This is used to categorise recipes
@@ -195,6 +208,14 @@ types:
           "currentPage": 1,
           "perPage": 20
         }
+  CategoryBody:
+    displayName: Category request body
+    description: This shows the data allowed to be sent as request when creating or updating a category
+    type: Category
+    example:
+      title: "soup"
+      descripion: "Lorem Ipsum has been the industry's standard"
+
   Ingredient:
     displayName: Recipe Category
     description: This is used to categorise recipes
@@ -270,6 +291,16 @@ types:
           "currentPage": 1,
           "perPage": 20
         }
+  IngredientBody:
+    displayName: Ingredient request body
+    description: This shows the data allowed to be sent as request when creating or updating a Ingedient
+    type: Ingredient
+    example:
+      name: "tomatoes"
+      quantity: "20"
+      unit: "kg"
+      recipe_id: "wdkwnkn0enknwen"
+
   Meta:
     displayName: Response metadata
     description: "This contains information about how users should paginate
@@ -289,12 +320,12 @@ types:
         example: 5
       currentPage:
         displayName: Current Page
-        description: Contains information about the current page the user is in
+        description: Contains information about the current page the user is on
         type: integer
         example: 5
       perPage:
         displayName: Resource per page
-        description: "Contains the total number of result to return for each page
+        description: "Contains the total number of results to return. Each page
         result return should not be greater than this number"
         type: integer
         example: 5
@@ -306,8 +337,6 @@ types:
         "perPage": 20
       }
 
-
-
   Content-Type:
     type: string
     description: This specifies how the content should be sent to the server
@@ -316,7 +345,6 @@ types:
 
 resourceTypes:
   Data:
-
     get:
       description: Handles request that involves single resource
       displayName: Gets a single <<ResourceName>>
@@ -334,20 +362,21 @@ resourceTypes:
       displayName: Updates a single <<ResourceName>>
       body:
         application/json:
-          type: Recipe
-          example:
-            <<example>>
+          type: <<Type>>
       responses:
         200:
           body:
             application/json:
               type: <<item>>
-
         404:
           body:
             application/json:
               type: <<Error>>
         500:
+          body:
+            application/json:
+              type: <<Error>>
+        400:
           body:
             application/json:
               type: <<Error>>
@@ -391,7 +420,7 @@ resourceTypes:
           example: 4
         q:
           type: string
-          description: "This is used to make search for speccific dataset, when used data
+          description: "This is used to  search for specific dataset. When used, data
           matching the value sent would be retured"
           required: false
           example: "ogbono soup"
@@ -407,13 +436,13 @@ resourceTypes:
             type: Content-Type
           body:
             application/json:
-              type: <<item>>
+              type: <<ReturnItem>>
     post:
       body:
         application/json:
           type: <<item>>
           displayName: Resource to create
-          description: "Contains data of been sent with the server request to the"
+          description: "Contains data  been sent to the server via the request body"
       responses:
         201:
           body:
@@ -429,52 +458,28 @@ resourceTypes:
 /recipes:
   displayName: Get all recipes
   description: This endpoint is used for getting all recipe
-  type:   { Collection: { item : Recipes, PostItem: Recipe } }
-  post:
-    body:
-      application/json:
-        type: Recipe
-        example:
-          name: "ogbono soup"
-          descripion: "Lorem Ipsum has been the industry's standard
-          dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
-          instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          photos:
-            - https://randomuser.me/api/portraits/med/men/83.jpg
-            - https://randomuser.me/api/portraits/med/med/83.jpg
-          category_id: "sajanjs9i0i23023"
-          user_id: "B9jsdjksdHsjdkd"
-    responses:
-      201:
-        body:
-          application/json:
-            type: Recipe
-            example:
-              id: "sajanjs9i0i23023"
-              name: "ogbono soup"
-              descripion: "Lorem Ipsum has been the industry's standard
-              dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled."
-              instruction: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-              photos:
-                - https://randomuser.me/api/portraits/med/men/83.jpg
-                - https://randomuser.me/api/portraits/med/med/83.jpg
-              category_id: "sajanjs9i0i23023"
-              user_id: "B9jsdjksdHsjdkd"
-              created_at: 2016-02-28T16:41:41.090Z
-              updated_at: 2016-02-28T16:41:41.090Z
-
+  type:   { Collection: { ReturnItem : Recipes, item: RecipeBody, PostItem: Recipe } }
 
   /{recipeId}:
     displayName: Get Recipe
-    description: Gets a single recipe
-    type: { Data: {ResourceName: Recipe, item: Recipe, Error: Error, message: Message} }
+    description: Performs GET,DELETE and UPDATE on recipe resource.
+    type: { Data: {ResourceName: Recipe, item: Recipe, Error: Error, message: Message, Type: RecipeBody} }
+    /ingredients:
+      displayName: Get all and create ingredients.
+      description: This endpoint is used for getting and creating ingredients.
+      type:   { Collection: { ReturnItem: Ingredients, item : IngredientBody, PostItem: Ingredient } }
+
+/ingredients{ingredientId}:
+  displayName: Ingredient
+  description: This endpoint is used for getting, deleting and updating ingredients.
+  type: { Data: {ResourceName: Ingredients, item: Ingredient, Error: Error, message: Message, Type: IngredientBody } }
 
 /categories:
   displayName: Get all categories
   description: This endpoint is used for getting all categories.
-  type:   { Collection: { item : Categories, PostItem: Categories } }
+  type:   { Collection: { ReturnItem: Categories, item : CategoryBody, PostItem: Category } }
 
   /{categoryId}:
     displayName: Category crud
-    description: Contains endpoints fotegoriesr performing crud operations for ca
-    type: { Data: {ResourceName: categories, item: Category, Error: Error, message: Message} }
+    description: Contains endpoints for performing crud operations for categories
+    type: { Data: {ResourceName: categories, item: Category, Error: Error, message: Message, Type: IngredientBody } }
