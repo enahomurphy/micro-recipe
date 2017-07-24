@@ -7,7 +7,7 @@ const _ = require('underscore');
 module.exports = class Controller {
   /**
    * @constructor
-   * @param {Object} schema 
+   * @param {Object} schema
    * @param {String} type type of schema
    * @param {String} relation query relationship
    */
@@ -26,7 +26,7 @@ module.exports = class Controller {
 
   /**
    * Set resource field that's updatable
-   * @param {Array} array 
+   * @param {Array} array
    * @return {Object} returns this
    */
   setUpdatable(array) {
@@ -120,7 +120,7 @@ module.exports = class Controller {
   }
 
   /**
-   * deletes a resource 
+   * deletes a resource
    * @param  {Object} req - request object
    * @param  {Object} res - response object
    * @return {Objects} returns a response

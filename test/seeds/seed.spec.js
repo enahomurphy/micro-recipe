@@ -54,7 +54,8 @@ describe('Seed Implementation ', () => {
     });
 
 
-    it('should populate data property with 5 objects when 5 is passed into build',
+    it(`should populate data property with 5 objects when 
+      5 is passed into build`,
       () => {
         recipe.build(5);
         recipe.data.should.be.an('array');

@@ -14,7 +14,7 @@ class Category extends Controller {
   }
 
   /**
-   * @param {Array} array 
+   * @param {Array} array
    * @return {Object} returns this
    */
   setUpdatable() {

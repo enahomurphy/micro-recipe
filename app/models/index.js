@@ -1,4 +1,3 @@
-
 module.exports = class Model {
   /**
    * @constructor
@@ -20,7 +19,7 @@ module.exports = class Model {
   }
 
   /**
-   * Gets all set, handles pagination and 
+   * Gets all set, handles pagination and
    * query params
    * @param {int} limit
    * @param {int} page
@@ -30,19 +29,22 @@ module.exports = class Model {
    */
   static getAll(limit, page, search, where = {}) {
     limit = parseInt(limit, 10);
-    limit = limit || 10; page = page || 1;
+    limit = limit || 10;
+    page = page || 1;
     const skip = limit * (page - 1);
     const result = { limit, currentPage: page };
     return new Promise((resolve, reject) => {
       this.buildQuery(search)
         .where(where)
-        .find(this.query).limit(limit)
+        .find(this.query)
+        .limit(limit)
         .skip(skip)
         .then(data => {
           result.data = data;
           this.buildQuery(search)
             .where(where)
-            .find(this.query).count()
+            .find(this.query)
+            .count()
             .then(count => {
               result.count = count;
               resolve(result);
@@ -54,7 +56,7 @@ module.exports = class Model {
   }
 
   /**
-   * deletes an object 
+   * deletes an object
    * @param {int} id
    * @return {Promise} returns an object
    */
@@ -70,7 +72,7 @@ module.exports = class Model {
    */
   static updateData(id, details) {
     const options = {
-      new: true,
+      new: true
     };
     return this.findByIdAndUpdate(id, details, options);
   }

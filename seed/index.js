@@ -29,10 +29,10 @@ module.exports = class Seed {
   }
 
   /**
-   * generates array of data to be 
+   * generates array of data to be
    * inserted into a collection
-   * @param {Integer} number 
-   * @return {Object} Object 
+   * @param {Integer} number
+   * @return {Object} Object
    */
   build(number = 1) {
     this.wipe();
