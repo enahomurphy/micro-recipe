@@ -58,7 +58,7 @@ module.exports = class Seed {
           throw new Error(err.message);
         });
     } else {
-      process.exit(1);
+      process.exit(0);
     }
   }
 };

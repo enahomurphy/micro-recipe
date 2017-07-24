@@ -90,21 +90,6 @@ describe('Seed Implementation ', () => {
       done();
     });
 
-    it('should throw an error if insert fails', () => {
-      const Schema = {
-        insertMany() {
-          return Promise.reject({ message: 'An error occurred' });
-        },
-        collection: { remove() {} }
-      };
-      const errorRecipe = new Recipe();
-      errorRecipe.schema = Schema;
-      const sinonErrorSpy = spy(Schema, 'insertMany');
-      process.env.NODE_ENV = 'development';
-      errorRecipe.build(5).run();
-      sinonErrorSpy.called.should.eql(true);
-    });
-
     it('should not call insertMany of NODE_ENV is not development or test',
       () => {
         process.env.NODE_ENV = 'production';
