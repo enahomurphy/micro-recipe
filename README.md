@@ -79,7 +79,7 @@ You can get all endpoints directly on you postman collection by clicking on the 
 
 ### How to Contribute
 
-* Fork repo to your branch
+* Fork repo to your account
 * Clone the repo
 * Add a feature and raise a PR to  the base branch
 * PR is reviewed and merged 
